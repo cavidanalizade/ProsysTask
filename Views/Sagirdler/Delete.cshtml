@@ -1,0 +1,32 @@
+@model ImtahanProqrami.Models.Sagird
+@{
+    ViewData["Title"] = "Sagirdi sil";
+    int imtahanSayi = ViewBag.ImtahanSayi ?? 0;
+}
+
+<h2>Sagirdi sil</h2>
+
+<p>Bu sagird silinsin?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Nomre</dt>
+    <dd class="col-sm-9">@Model.Nomre</dd>
+
+    <dt class="col-sm-3">Adi soyadi</dt>
+    <dd class="col-sm-9">@Model.TamAd</dd>
+
+    <dt class="col-sm-3">Sinif</dt>
+    <dd class="col-sm-9">@Model.Sinif</dd>
+</dl>
+
+@if (imtahanSayi > 0)
+{
+    <div class="alert alert-warning">
+        Bu sagirdin @imtahanSayi imtahan neticesi var. Evvelce onlar silinmelidir.
+    </div>
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Nomre" method="post">
+    <button type="submit" class="btn btn-danger" disabled="@(imtahanSayi > 0)">Sil</button>
+    <a asp-action="Index" class="btn btn-link">Imtina</a>
+</form>

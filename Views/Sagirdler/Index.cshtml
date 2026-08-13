@@ -1,0 +1,57 @@
+@model IEnumerable<ImtahanProqrami.Models.Sagird>
+@{
+    ViewData["Title"] = "Sagirdler";
+}
+
+<h2>Sagirdler</h2>
+
+<div class="d-flex justify-content-between align-items-end mb-3">
+    <form asp-action="Index" method="get" class="row g-2 align-items-end">
+        <div class="col-auto">
+            <label class="form-label">Ad / soyad</label>
+            <input name="axtaris" value="@ViewBag.Axtaris" class="form-control" />
+        </div>
+        <div class="col-auto">
+            <label class="form-label">Sinif</label>
+            <input name="sinif" value="@ViewBag.Sinif" type="number" min="1" max="11" class="form-control" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-secondary">Axtar</button>
+            <a asp-action="Index" class="btn btn-link">Sifirla</a>
+        </div>
+    </form>
+
+    <a asp-action="Create" class="btn btn-primary">Yeni sagird</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Nomre</th>
+            <th>Adi</th>
+            <th>Soyadi</th>
+            <th>Sinif</th>
+            <th style="width:220px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sagird in Model)
+        {
+            <tr>
+                <td>@sagird.Nomre</td>
+                <td>@sagird.Adi</td>
+                <td>@sagird.Soyadi</td>
+                <td>@sagird.Sinif</td>
+                <td>
+                    <a asp-action="Detay" asp-route-id="@sagird.Nomre" class="btn btn-sm btn-outline-secondary">Neticeler</a>
+                    <a asp-action="Edit" asp-route-id="@sagird.Nomre" class="btn btn-sm btn-outline-primary">Duzelt</a>
+                    <a asp-action="Delete" asp-route-id="@sagird.Nomre" class="btn btn-sm btn-outline-danger">Sil</a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="5" class="text-muted">Sagird tapilmadi.</td></tr>
+        }
+    </tbody>
+</table>

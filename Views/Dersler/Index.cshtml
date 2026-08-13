@@ -1,0 +1,52 @@
+@model IEnumerable<ImtahanProqrami.Models.Ders>
+@{
+    ViewData["Title"] = "Dersler";
+}
+
+<h2>Dersler</h2>
+
+<div class="d-flex justify-content-between align-items-end mb-3">
+    <form asp-action="Index" method="get" class="row g-2 align-items-end">
+        <div class="col-auto">
+            <label class="form-label">Sinif</label>
+            <input name="sinif" value="@ViewBag.Sinif" type="number" min="1" max="11" class="form-control" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-secondary">Filtrle</button>
+            <a asp-action="Index" class="btn btn-link">Sifirla</a>
+        </div>
+    </form>
+
+    <a asp-action="Create" class="btn btn-primary">Yeni ders</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Kod</th>
+            <th>Dersin adi</th>
+            <th>Sinif</th>
+            <th>Muellim</th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ders in Model)
+        {
+            <tr>
+                <td>@ders.DersKodu</td>
+                <td>@ders.DersAdi</td>
+                <td>@ders.Sinif</td>
+                <td>@ders.MuellimAdi @ders.MuellimSoyadi</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@ders.DersKodu" class="btn btn-sm btn-outline-primary">Duzelt</a>
+                    <a asp-action="Delete" asp-route-id="@ders.DersKodu" class="btn btn-sm btn-outline-danger">Sil</a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="5" class="text-muted">Ders tapilmadi.</td></tr>
+        }
+    </tbody>
+</table>

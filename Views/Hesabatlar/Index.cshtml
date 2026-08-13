@@ -1,0 +1,92 @@
+@model ImtahanProqrami.Models.HesabatGorunusu
+@{
+    ViewData["Title"] = "Hesabatlar";
+}
+
+<h2>Hesabatlar</h2>
+
+<h4 class="mt-4">Dersler uzre orta bal</h4>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Ders</th><th>Imtahan sayi</th><th>Orta bal</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var setir in Model.DersUzre)
+        {
+            <tr>
+                <td>@setir.DersAdi</td>
+                <td>@setir.ImtahanSayi</td>
+                <td>@(setir.OrtaBal?.ToString("0.00") ?? "-")</td>
+            </tr>
+        }
+        @if (!Model.DersUzre.Any())
+        {
+            <tr><td colspan="3" class="text-muted">Melumat yoxdur.</td></tr>
+        }
+    </tbody>
+</table>
+
+<h4 class="mt-4">Sagirdler uzre orta bal</h4>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Nomre</th><th>Sagird</th><th>Sinif</th><th>Imtahan sayi</th><th>Orta bal</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var setir in Model.SagirdUzre)
+        {
+            <tr>
+                <td>@setir.Nomre</td>
+                <td>@setir.Adi @setir.Soyadi</td>
+                <td>@setir.Sinif</td>
+                <td>@setir.ImtahanSayi</td>
+                <td>@(setir.OrtaBal?.ToString("0.00") ?? "-")</td>
+            </tr>
+        }
+        @if (!Model.SagirdUzre.Any())
+        {
+            <tr><td colspan="5" class="text-muted">Melumat yoxdur.</td></tr>
+        }
+    </tbody>
+</table>
+
+<h4 class="mt-4">Kesir alanlar</h4>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Sagird</th><th>Ders</th><th>Tarix</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var imtahan in Model.Kesirler)
+        {
+            <tr>
+                <td>@imtahan.Sagird?.Adi @imtahan.Sagird?.Soyadi</td>
+                <td>@imtahan.Ders?.DersAdi</td>
+                <td>@imtahan.ImtahanTarixi.ToString("dd.MM.yyyy")</td>
+            </tr>
+        }
+        @if (!Model.Kesirler.Any())
+        {
+            <tr><td colspan="3" class="text-muted">Kesir yoxdur.</td></tr>
+        }
+    </tbody>
+</table>
+
+<h4 class="mt-4">Hec bir imtahan vermeyenler</h4>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Nomre</th><th>Sagird</th><th>Sinif</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var sagird in Model.Imtahansizlar)
+        {
+            <tr>
+                <td>@sagird.Nomre</td>
+                <td>@sagird.TamAd</td>
+                <td>@sagird.Sinif</td>
+            </tr>
+        }
+        @if (!Model.Imtahansizlar.Any())
+        {
+            <tr><td colspan="3" class="text-muted">Butun sagirdler imtahan verib.</td></tr>
+        }
+    </tbody>
+</table>

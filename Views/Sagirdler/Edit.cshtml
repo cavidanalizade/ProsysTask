@@ -1,0 +1,45 @@
+@model ImtahanProqrami.Models.Sagird
+@{
+    ViewData["Title"] = "Sagirdi duzelt";
+}
+
+<h2>Sagirdi duzelt</h2>
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Edit" asp-route-id="@Model.Nomre" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Nomre" class="form-label"></label>
+                <input asp-for="Nomre" class="form-control" readonly />
+                <div class="form-text">Nomre deyismir, o primary key-dir.</div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Adi" class="form-label"></label>
+                <input asp-for="Adi" class="form-control" maxlength="30" />
+                <span asp-validation-for="Adi" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Soyadi" class="form-label"></label>
+                <input asp-for="Soyadi" class="form-control" maxlength="30" />
+                <span asp-validation-for="Soyadi" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Sinif" class="form-label"></label>
+                <input asp-for="Sinif" class="form-control" type="number" min="1" max="11" />
+                <span asp-validation-for="Sinif" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Yenile</button>
+            <a asp-action="Index" class="btn btn-link">Geri</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

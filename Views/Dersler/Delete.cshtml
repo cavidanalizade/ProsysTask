@@ -1,0 +1,35 @@
+@model ImtahanProqrami.Models.Ders
+@{
+    ViewData["Title"] = "Dersi sil";
+    int imtahanSayi = ViewBag.ImtahanSayi ?? 0;
+}
+
+<h2>Dersi sil</h2>
+
+<p>Bu ders silinsin?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Kod</dt>
+    <dd class="col-sm-9">@Model.DersKodu</dd>
+
+    <dt class="col-sm-3">Dersin adi</dt>
+    <dd class="col-sm-9">@Model.DersAdi</dd>
+
+    <dt class="col-sm-3">Sinif</dt>
+    <dd class="col-sm-9">@Model.Sinif</dd>
+
+    <dt class="col-sm-3">Muellim</dt>
+    <dd class="col-sm-9">@Model.MuellimAdi @Model.MuellimSoyadi</dd>
+</dl>
+
+@if (imtahanSayi > 0)
+{
+    <div class="alert alert-warning">
+        Bu dersden @imtahanSayi imtahan neticesi var. Evvelce onlar silinmelidir.
+    </div>
+}
+
+<form asp-action="Delete" asp-route-id="@Model.DersKodu" method="post">
+    <button type="submit" class="btn btn-danger" disabled="@(imtahanSayi > 0)">Sil</button>
+    <a asp-action="Index" class="btn btn-link">Imtina</a>
+</form>

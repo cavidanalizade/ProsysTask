@@ -1,0 +1,71 @@
+@model IEnumerable<ImtahanProqrami.Models.Imtahan>
+@{
+    ViewData["Title"] = "Imtahanlar";
+}
+
+<h2>Imtahanlar</h2>
+
+<div class="d-flex justify-content-between align-items-end mb-3">
+    <form asp-action="Index" method="get" class="row g-2 align-items-end">
+        <div class="col-auto">
+            <label class="form-label">Derse gore</label>
+            <select name="dersKodu" asp-items="ViewBag.Dersler" class="form-select">
+                <option value="">hamisi</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-secondary">Filtrle</button>
+        </div>
+    </form>
+
+    <a asp-action="Create" class="btn btn-primary">Yeni imtahan</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Tarix</th>
+            <th>Ders</th>
+            <th>Sagird</th>
+            <th>Qiymet</th>
+            <th style="width:160px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var imtahan in Model)
+        {
+            <tr>
+                <td>@imtahan.ImtahanTarixi.ToString("dd.MM.yyyy")</td>
+                <td>@imtahan.Ders?.DersAdi</td>
+                <td>@imtahan.Sagird?.Adi @imtahan.Sagird?.Soyadi</td>
+                <td>
+                    @if (imtahan.Qiymet is null)
+                    {
+                        <span class="text-muted">qoyulmayib</span>
+                    }
+                    else
+                    {
+                        @imtahan.Qiymet
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-dersKodu="@imtahan.DersKodu"
+                       asp-route-sagirdNomresi="@imtahan.SagirdNomresi"
+                       asp-route-tarix="@imtahan.ImtahanTarixi.ToString("yyyy-MM-dd")"
+                       class="btn btn-sm btn-outline-primary">Qiymet</a>
+
+                    <a asp-action="Delete"
+                       asp-route-dersKodu="@imtahan.DersKodu"
+                       asp-route-sagirdNomresi="@imtahan.SagirdNomresi"
+                       asp-route-tarix="@imtahan.ImtahanTarixi.ToString("yyyy-MM-dd")"
+                       class="btn btn-sm btn-outline-danger">Sil</a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="5" class="text-muted">Netice yoxdur.</td></tr>
+        }
+    </tbody>
+</table>

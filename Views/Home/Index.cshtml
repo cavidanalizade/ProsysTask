@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Baslangic";
+}
+
+<h1>Imtahan proqrami</h1>
+<p class="text-muted">Orta mektebde imtahan neticelerinin qeydiyyati.</p>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.DersSayi</h5>
+                <p class="card-text text-muted">ders</p>
+                <a asp-controller="Dersler" asp-action="Index" class="btn btn-sm btn-outline-primary">Ac</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.SagirdSayi</h5>
+                <p class="card-text text-muted">sagird</p>
+                <a asp-controller="Sagirdler" asp-action="Index" class="btn btn-sm btn-outline-primary">Ac</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.ImtahanSayi</h5>
+                <p class="card-text text-muted">imtahan</p>
+                <a asp-controller="Imtahanlar" asp-action="Index" class="btn btn-sm btn-outline-primary">Ac</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.QiymetsizSayi</h5>
+                <p class="card-text text-muted">qiymeti qoyulmayib</p>
+                <a asp-controller="Hesabatlar" asp-action="Index" class="btn btn-sm btn-outline-primary">Hesabatlar</a>
+            </div>
+        </div>
+    </div>
+</div>

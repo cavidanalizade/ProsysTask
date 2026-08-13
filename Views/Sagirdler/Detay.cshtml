@@ -1,0 +1,39 @@
+@model ImtahanProqrami.Models.Sagird
+@{
+    ViewData["Title"] = "Sagirdin neticeleri";
+    var qiymetliler = Model.Imtahanlar.Where(i => i.Qiymet != null).ToList();
+}
+
+<h2>@Model.TamAd</h2>
+<p class="text-muted">Nomre: @Model.Nomre, @Model.Sinif-ci sinif</p>
+
+@if (qiymetliler.Any())
+{
+    <p><strong>Orta bal:</strong> @qiymetliler.Average(i => i.Qiymet!.Value).ToString("0.00")</p>
+}
+
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Tarix</th>
+            <th>Ders</th>
+            <th>Qiymet</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var imtahan in Model.Imtahanlar.OrderByDescending(i => i.ImtahanTarixi))
+        {
+            <tr>
+                <td>@imtahan.ImtahanTarixi.ToString("dd.MM.yyyy")</td>
+                <td>@imtahan.Ders?.DersAdi</td>
+                <td>@(imtahan.Qiymet?.ToString() ?? "-")</td>
+            </tr>
+        }
+        @if (!Model.Imtahanlar.Any())
+        {
+            <tr><td colspan="3" class="text-muted">Bu sagird hele imtahan vermeyib.</td></tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-link">Geri</a>

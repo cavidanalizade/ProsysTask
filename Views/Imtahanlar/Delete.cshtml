@@ -1,0 +1,31 @@
+@model ImtahanProqrami.Models.Imtahan
+@{
+    ViewData["Title"] = "Neticeni sil";
+}
+
+<h2>Imtahan neticesini sil</h2>
+
+<p>Bu netice silinsin?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Ders</dt>
+    <dd class="col-sm-9">@Model.Ders?.DersAdi</dd>
+
+    <dt class="col-sm-3">Sagird</dt>
+    <dd class="col-sm-9">@Model.Sagird?.Adi @Model.Sagird?.Soyadi</dd>
+
+    <dt class="col-sm-3">Tarix</dt>
+    <dd class="col-sm-9">@Model.ImtahanTarixi.ToString("dd.MM.yyyy")</dd>
+
+    <dt class="col-sm-3">Qiymet</dt>
+    <dd class="col-sm-9">@(Model.Qiymet?.ToString() ?? "qoyulmayib")</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="dersKodu" value="@Model.DersKodu" />
+    <input type="hidden" name="sagirdNomresi" value="@Model.SagirdNomresi" />
+    <input type="hidden" name="tarix" value="@Model.ImtahanTarixi.ToString("yyyy-MM-dd")" />
+
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-link">Imtina</a>
+</form>
