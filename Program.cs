@@ -7,7 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ImtahanContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ImtahanDB")));
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    //bos select ve ya bos tarix gonderilende ingilisce mesaj cixirdi
+    var mesajlar = options.ModelBindingMessageProvider;
+    mesajlar.SetAttemptedValueIsInvalidAccessor((deyer, sahe) => "Duzgun deyer secin.");
+    mesajlar.SetValueIsInvalidAccessor(deyer => "Duzgun deyer secin.");
+    mesajlar.SetValueMustNotBeNullAccessor(deyer => "Bu sahe bos ola bilmez.");
+});
 
 var app = builder.Build();
 

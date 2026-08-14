@@ -7,9 +7,10 @@ namespace ImtahanProqrami.Models
     {
         private string _dersKodu = "";
 
+        //burda StringLength qoymuram - ders siyahidan secilir, jquery validation
+        //select-de uzunlugu yox, secilmis option sayini olcur ve hemise xeta verir
         [Display(Name = "Ders")]
         [Required(ErrorMessage = "Ders secilmelidir.")]
-        [StringLength(3, MinimumLength = 3)]
         public string DersKodu
         {
             get { return _dersKodu; }
@@ -17,6 +18,7 @@ namespace ImtahanProqrami.Models
         }
 
         [Display(Name = "Sagird")]
+        [Required(ErrorMessage = "Sagird secilmelidir.")]
         [Range(1, 99999, ErrorMessage = "Sagird secilmelidir.")]
         public int SagirdNomresi { get; set; }
 
